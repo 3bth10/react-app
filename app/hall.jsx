@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Link } from 'expo-router'
 
-const Contact = () => {
+const Contact = ({valuehall}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title }>contact page  </Text>
+      <Text style={styles.title }>contact page  </Text>,
+      <View>
+        <Text>{valuehall}</Text>
+      </View>
         <Link  href='/'> back home  </Link>
     </View>
   )

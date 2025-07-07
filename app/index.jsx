@@ -3,6 +3,7 @@ import logo from '../assets/110.png'
 import historyimage from '../assets/history.png'
 import {Link} from 'expo-router'
 import Hall from '../components/hall'
+import homeHall from '../app/hall'
 import { useState } from 'react'
 
 const home = () => {
@@ -26,12 +27,16 @@ const home = () => {
     }
      
     console.log(list)
-    
   }  
+
+  const gethallValue = (value) => {
+    value(list)
+  }
+
   return (
     <>
     <Text style={style.title}> حساب الحفلات  </Text>
-
+    <homeHall > </homeHall>
     <View style={style.containerText}>
     <KeyboardAvoidingView behavior={Platform.OS === 'android' ? 'padding' : 'height'}>
         <TextInput style={style.textInput} onChangeText={ t => {sethall(t)}}  placeholder='Enter nema of the hall '/>
@@ -42,7 +47,7 @@ const home = () => {
       <Button color={'coral'} title='حفظ' onPress={add}/>
     </View>
     <View style={style.container}>
-       <Link style={style.link} href={'/hall'} >   <Image source={historyimage} style={{width : 40 ,height : 40 }} alt="history" />  سجل الحفلات</Link>
+       <Link style={style.link} href={'/hall'} > <Image source={historyimage} style={{width : 40 ,height : 40 }} alt="history" />  سجل الحفلات</Link>
     </View>
   
     </>
