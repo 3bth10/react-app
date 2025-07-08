@@ -5,8 +5,11 @@ import {Link} from 'expo-router'
 import Hall from '../components/hall'
 import homeHall from '../app/hall'
 import { useState } from 'react'
+import { useRouter } from 'expo-router'
 
-const home = () => {
+const home = ({navigation }) => {
+  const router = useRouter()
+  
 
   const [hall , sethall] = useState()
   const [many , setmany] = useState()
@@ -25,19 +28,14 @@ const home = () => {
       {'name' : hall, 'many' : many, 'location' : location, 'people' : people, 'date' : getdate()} 
     ]) 
     }
-     
-    console.log(list)
   }  
 
-  const gethallValue = (value) => {
-    value(list)
-  }
 
   return (
     <>
-    <Text style={style.title}> حساب الحفلات  </Text>
-    <homeHall > </homeHall>
-    <View style={style.containerText}>
+    <Text style={style.title}> حساب الحفلات </Text>
+
+ <View style={style.containerText}>
     <KeyboardAvoidingView behavior={Platform.OS === 'android' ? 'padding' : 'height'}>
         <TextInput style={style.textInput} onChangeText={ t => {sethall(t)}}  placeholder='Enter nema of the hall '/>
         <TextInput style={style.textInput} keyboardType="numeric" onChangeText={ t => {setmany(t)}} placeholder='عدد السخانات'/>
@@ -47,8 +45,15 @@ const home = () => {
       <Button color={'coral'} title='حفظ' onPress={add}/>
     </View>
     <View style={style.container}>
-       <Link style={style.link} href={'/hall'} > <Image source={historyimage} style={{width : 40 ,height : 40 }} alt="history" />  سجل الحفلات</Link>
-    </View>
+<Link
+  style={style.link}
+  href=""
+  onPress={() => router.push({ pathname: '/hall', params: { list : JSON.stringify(list) } })}
+>
+  <Image source={historyimage} style={{ width: 40, height: 40 }} />
+  سجل الحفلات
+</Link>  
+  </View>
   
     </>
 
@@ -68,6 +73,7 @@ bbb:{
   color : 'green',
 }, 
   title:{
+   
     fontSize: 33,
     margin : 20,
     fontWeight : 'bold',
@@ -75,6 +81,7 @@ bbb:{
     textAlign : "center"
   } , 
   link : {
+  
     textAlign : 'cnter' ,
     alignItems : 'center', 
     width : 200,
@@ -91,6 +98,7 @@ bbb:{
     borderRadius : 20 , 
   },
   textInput : {
+    flex  : 1, 
     textAlign : 'center',
     margin : 10, 
     backgroundColor : '#ddd' ,

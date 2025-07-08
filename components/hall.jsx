@@ -1,27 +1,42 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const hall = (props) => {
+const hall = (obj) => {
+  const now = obj.hall.map(el =>  {return el} )
+
   return (
-    <View>
-      <Text style={styles.hall}>   {props.hall.name}</Text>
-      <Text style={styles.hall}>   {props.hall.many}</Text>
-      <Text style={styles.hall}>   {props.hall.location}</Text>
-      <Text style={styles.hall}>   {props.hall.people}</Text>  
-      <Text style={styles.hall}>   {props.hall.date}</Text>  
-    </View>
-  )
-}
+    <View style={styles.containerhall}>
+      
+{     now.map((el , i)=> {
+   return <View style={styles.con}>
+     <Text style={styles.hall}>  {el.name}</Text> 
+     <Text style={styles.hall}>  {el.location}</Text> 
+     <Text style={styles.hall}>  {el.many}</Text> 
+     <Text style={styles.hall}>  {el.people}</Text> 
+     <Text style={styles.hall}>  {el.date}</Text> 
+     </View>
+})}
+    </View>  )}
 
 export default hall
 
 const styles = StyleSheet.create({ 
+containerhall : {
+  flex : 1 , 
+},
+  con : {
+   
+    flexDirection : 'row'
+  },
   hall : {
-    backgroundColor : 'green' , 
-    fontSize : 19 ,
-    borderRadius : 30,
+   
+    backgroundColor : 'coral' , 
+    fontSize : 14 ,
+    borderRadius : 10,
     color : '#fff', 
-    width : 100,
-    textAlign : 'center'
+    textAlign : 'center',
+    margin : 5, 
+    padding : 10 ,
+
   }
 })
