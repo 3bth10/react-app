@@ -1,42 +1,69 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
 
 const hall = (obj) => {
-  const now = obj.hall.map(el =>  {return el} )
+  let num = 0;
+  let ff = 0;
+  const now = obj.hall.map(el =>  {
+    num++ 
+     ff = el.location == 'مكة' ? 50 : 0
+     el.many > 11 ? ff*2 : ff
+     return el } )
 
   return (
     <View style={styles.containerhall}>
-      
+      <Text> عدد الحفلات {num} </Text>
+
 {     now.map((el , i)=> {
-   return <View style={styles.con}>
+   return <View style={styles.con }>
+   
      <Text style={styles.hall}>  {el.name}</Text> 
      <Text style={styles.hall}>  {el.location}</Text> 
      <Text style={styles.hall}>  {el.many}</Text> 
      <Text style={styles.hall}>  {el.people}</Text> 
      <Text style={styles.hall}>  {el.date}</Text> 
+     <Text style={styles.hall}>  {ff}</Text> 
      </View>
 })}
+
     </View>  )}
 
 export default hall
 
 const styles = StyleSheet.create({ 
 containerhall : {
-  flex : 1 , 
+  
+  borderColor : 'back' ,
+  alignItems : 'center',
+  justifyContent : 'center',
+  padding : 10 ,
+  margin : 5 , 
+ 
+
 },
+header : {
+  flexDirection: 'row',
+  margin : 5 , 
+  padding : 5, 
+  backgroundColor : 'coral',
+},
+
   con : {
-   
-    flexDirection : 'row'
+    flexDirection : 'row',
+    margin : 5,   padding : 5 ,
+    borderWidth : 1 ,
+    borderStyle : 'dashed',
+    borderColor: 'black',
+    borderRadius : 10 ,
+    color : '#fff',
+    alignItems : 'center'
+  
   },
   hall : {
-   
-    backgroundColor : 'coral' , 
-    fontSize : 14 ,
-    borderRadius : 10,
-    color : '#fff', 
-    textAlign : 'center',
-    margin : 5, 
-    padding : 10 ,
 
+    backgroundColor : '#ddd',
+    padding : 5 ,
+    borderRadius : 10 ,
+    margin : 2 , 
+    
   }
 })

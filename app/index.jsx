@@ -1,9 +1,6 @@
-import { StyleSheet, Text, View , Image, TextInput, KeyboardAvoidingView, Platform , Button} from 'react-native'
-import logo from '../assets/110.png'
+import { StyleSheet, Text, View , Image, TextInput, KeyboardAvoidingView, Platform , Button, Alert, TouchableOpacity} from 'react-native'
 import historyimage from '../assets/history.png'
 import {Link} from 'expo-router'
-import Hall from '../components/hall'
-import homeHall from '../app/hall'
 import { useState } from 'react'
 import { useRouter } from 'expo-router'
 
@@ -11,19 +8,22 @@ const home = ({navigation }) => {
   const router = useRouter()
   
 
-  const [hall , sethall] = useState()
-  const [many , setmany] = useState()
-  const [location , setlocation] = useState()
-  const [people , setpeople] = useState()
+  const [hall , sethall] = useState('')
+  const [many , setmany] = useState('')
+  const [location , setlocation] = useState('')
+  const [people , setpeople] = useState('')
   const [list , setlist] = useState([])
 
   const add = () =>  {
-    if (hall && many ){
+    if (hall && many && location){
       const getdate = () => {
         const day = new Date().getDate()
         const month = new Date().getMonth()
+        Alert.alert('اضافة' , ' تمت الاضافة بنحاح')
+
         return 'يوم'+ day +' شهر'+ month
       } 
+    
         setlist([...list ,
       {'name' : hall, 'many' : many, 'location' : location, 'people' : people, 'date' : getdate()} 
     ]) 
@@ -36,13 +36,16 @@ const home = ({navigation }) => {
     <Text style={style.title}> حساب الحفلات </Text>
 
  <View style={style.containerText}>
-    <KeyboardAvoidingView behavior={Platform.OS === 'android' ? 'padding' : 'height'}>
-        <TextInput style={style.textInput} onChangeText={ t => {sethall(t)}}  placeholder='Enter nema of the hall '/>
-        <TextInput style={style.textInput} keyboardType="numeric" onChangeText={ t => {setmany(t)}} placeholder='عدد السخانات'/>
-        <TextInput style={style.textInput} onChangeText={ t => {setlocation(t)}} placeholder='الموقع'/>
-        <TextInput style={style.textInput} keyboardType="numeric" onChangeText={ t => {setpeople(t)}} placeholder='عدد الاشخاص'/>
+  
+    <KeyboardAvoidingView style={{flexDirection : 'row' , flexWrap : 'wrap' , justifyContent: 'center'}} behavior={Platform.OS === 'android' ? 'padding' : 'height'}>
+        <TextInput style={style.textInput} value={hall}  onChangeText={ t => {sethall(t)}}  placeholder=' اسم القاعة'/>
+        <TextInput style={style.textInput} value={many} keyboardType="numeric" onChangeText={ t => {setmany(t)}} placeholder='عدد السخانات'/>
+        <TextInput style={style.textInput} value={location} onChangeText={ t => {setlocation(t)}} placeholder='الموقع'/>
+        <TextInput style={style.textInput} value={people} keyboardType="numeric" onChangeText={ t => {setpeople(t)}} placeholder='عدد الاشخاص'/>
       </KeyboardAvoidingView>
-      <Button color={'coral'} title='حفظ' onPress={add}/>
+      <TouchableOpacity style={style.bbb} onPress={add}>
+        <Text style={{textAlign : 'center' , color : '#fff'}}>حفظ</Text> 
+        </TouchableOpacity>
     </View>
     <View style={style.container}>
 <Link
@@ -69,11 +72,16 @@ const style = StyleSheet.create ({
   },
    
 bbb:{
-  backgroundColor : 'red',
-  color : 'green',
+  width : 100, 
+  backgroundColor : 'coral',
+  borderRadius : 10, 
+  padding : 5 ,
+  color : 'white',
+  fontWeight : 'bold'
+
+  
 }, 
   title:{
-   
     fontSize: 33,
     margin : 20,
     fontWeight : 'bold',
@@ -98,16 +106,18 @@ bbb:{
     borderRadius : 20 , 
   },
   textInput : {
-    flex  : 1, 
+   
     textAlign : 'center',
     margin : 10, 
     backgroundColor : '#ddd' ,
     padding : 8,
     borderColor : 'red',
-    
+    width : 120,
+    borderRadius :10 ,
   }, 
   containerText : {
     flex : 1 , 
+   
     justifyContent : "center" , 
     alignItems : 'center' , 
     marginTop : 50 ,
