@@ -16,9 +16,9 @@ const hall = (obj) => {
 {     now.map((el , i)=> {
    return <View style={styles.con }>
    
-     <Text style={styles.hall}>  {el.name}</Text> 
+     <Text style={styles.hall}>  {el.hall}</Text> 
      <Text style={styles.hall}>  {el.location}</Text> 
-     <Text style={styles.hall}>  {el.many}</Text> 
+     <Text style={styles.hall}>  {el.howMnayAre}</Text> 
      <Text style={styles.hall}>  {el.people}</Text> 
      <Text style={styles.hall}>  {el.date}</Text> 
      <Text style={styles.hall}>  {ff}</Text> 

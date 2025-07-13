@@ -8,7 +8,7 @@ const Contact = () => {
 
   const {list} = useLocalSearchParams()
 
-
+// console.log(list , 'from hall')
 const makeObj = (JSON.parse(list))
 
 
